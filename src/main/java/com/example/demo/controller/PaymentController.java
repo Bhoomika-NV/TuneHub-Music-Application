@@ -86,35 +86,6 @@ public class PaymentController {
 			e.printStackTrace();
 			return false;
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
  
