@@ -22,7 +22,7 @@
    <ul>
      <li th:each="song: ${plist.songs}">
         <span  th:text="${song.name}"></span>
-           <audio controls  th:src="${song.link}" type="audio/mpeg"></audio>
+           <audio controls  th:src="${song.link}" type="audio/mpeg"></audio>  
       </li>
     </ul>
   </td>

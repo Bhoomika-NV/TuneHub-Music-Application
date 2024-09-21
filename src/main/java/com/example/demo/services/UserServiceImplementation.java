@@ -10,11 +10,15 @@ public class UserServiceImplementation implements UsersServices{
 
 	@Autowired
 	UsersRepository repo;
+	
+	
+	
 	public String addUsers(Users user) {
 		repo.save(user);
 		return "Insertion "+user+"  done ";
 	}
-	@Override
+	 
+	 	@Override
 	public boolean emailExists(String email) {
 		if(repo.findByEmail(email)==null) {
 			return false;
@@ -54,4 +58,18 @@ public class UserServiceImplementation implements UsersServices{
 		 repo.save(user);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

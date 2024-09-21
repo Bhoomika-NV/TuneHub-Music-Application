@@ -34,16 +34,15 @@
 
 </head>
 <body>
-<div>
+ 
 
 		<h1>Why premium ? </h1>
 		<p>text...................</p>
-
-    	<form id="payment-form">
+          <form id="payment-form">   
+    
 	        <button type="submit" class="buy-button" >BUY</button>
 	    </form>
-
-</div>
+ 
 
 <script>
 $(document).ready(function() {
@@ -91,19 +90,23 @@ function createOrder() {
         });
 }
 
-function verifyPayment(orderId, paymentId, signature) {
+  function verifyPayment(orderId, paymentId, signature) {
      $.post("/verify", { orderId: orderId, paymentId: paymentId, signature: signature })
          .done(function(isValid) {
              if (isValid) {
-                 console.log("Payment successful");
+            	 alert("Payment successfull");
+            	 window.location.href="payment-success";
+                  
              } else {
+            	 alert("payment failed");
                  console.log("Payment failed");
+                 window.location.href="payment-failure";
              }
          })
          .fail(function(error) {
              console.error("Error:", error);
          });
-}
+}  
 </script>
 </body>
 </html>

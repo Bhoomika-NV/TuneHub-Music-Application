@@ -5,9 +5,36 @@
 <title>customer Home</title>
 </head>
 <body>
-<h1><marquee>Customer home</marquee></h1>
-<a href="pay">Get PREMIUM</a><br><br>
-<h2> Listen to unlimited top songs!</h2>
-<a href="logout">LOGOUT</a>
+  <h1><marquee>Customer home</marquee></h1>
+  <!-- <div th:unless="${isPremium}" class="non-premium">
+   -->
+    <a href="pay">Get PREMIUM</a><br><br>
+    
+    
+      <h2> Listen to unlimited top songs!</h2>
+      
+      <a href="logout">LOGOUT</a>
+    <!--  </div> -->
+
+     <div th:if="${isPremium}" class="premium">
+
+      <table border="1">
+      <tr>
+    <th>name</th>
+    <th>artist</th>
+    <th>genre</th>
+    <th>Play</th>
+</tr>
+<tr th:each="song:${songs}">
+<td th:text="${song.name}"></td>
+<td th:text="${song.artist}"></td>
+<td th:text="${song.genre}"></td>
+<td>
+<audio th:src="${song.link}"   type="audio/mp3" controls></audio>  <!-- NOTICABLE CHANGE I DID HERE THAT IS THYMELEAF-->
+</td>
+</tr>
+</table>
+
+</div>
 </body>
 </html>

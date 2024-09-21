@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,9 +42,10 @@ public class UserController {
 		                                 //System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getEmail()+" "+user.getGender()+" "+user.getRole()+" "+user.getAddress());
 		return "home";
 	}
+	// trying to push the changes here..
 	@PostMapping("/validate")							//task4
 	public String validate(@RequestParam("email") String email,
-			@RequestParam("password")String password ,HttpSession session)//when we,ll collect the data in backend Requestparm is user , here login module has email and password 
+			@RequestParam("password")String password ,HttpSession session, Model model)//when we,ll collect the data in backend Requestparm is user , here login module has email and password 
 	{
 		if( service.validateUser(email,password)==true)
 		{
@@ -56,6 +58,9 @@ public class UserController {
 				return "adminHome";
 			}
 			else {
+				Users user = service.getUser(email);
+				boolean userStatus  = user.isPremium();
+				model.addAttribute("isPremium", user);
 				return "customerHome";
 			}
 		}
