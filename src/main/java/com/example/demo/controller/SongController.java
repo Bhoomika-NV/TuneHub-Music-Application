@@ -17,16 +17,14 @@ public class SongController {
 
 	@Autowired
 	SongService service;
+
 	@PostMapping("/addSong")
 	public String addSong(@ModelAttribute Song song) {
-        
-		boolean name_status=service.nameExist(song.getName());
-		if(name_status==false)
-		{
+
+		boolean name_status = service.nameExist(song.getName());
+		if (name_status == false) {
 			service.addSong(song);
-		} 
-		else 
-		{
+		} else {
 			System.out.println("Already added");
 			return "newSong";
 		}
@@ -35,24 +33,22 @@ public class SongController {
 
 	@GetMapping("/viewSongs")
 	public String viewSongs(Model model) {
-	List <Song>songsList=service.fetchAllSongs();	
+		List<Song> songsList = service.fetchAllSongs();
 		model.addAttribute("songs", songsList);
 		return "displaySongs";
 	}
-	
+
 	@GetMapping("/playSongs")
 	public String playSongs(Model model) {
-		boolean premierUser =false;
-		if(premierUser==true) {
-			List <Song>songsList=service.fetchAllSongs();	
+		boolean premierUser = false;
+		if (premierUser == true) {
+			List<Song> songsList = service.fetchAllSongs();
 			model.addAttribute("songs", songsList);
-			return "displaySongs";	
-		}
-		else
-		{
+			return "displaySongs";
+		} else {
 			return "makepayment";
 		}
-	
+
 	}
 
 }

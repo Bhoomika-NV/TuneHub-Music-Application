@@ -7,13 +7,12 @@ import com.example.demo.entities.Song;
 
 public interface SongService {
 
-	  public void addSong(Song song);
-	  public void updateSong(Song song);
+	public void addSong(Song song);
+
+	public void updateSong(Song song);
 
 	public List<Song> fetchAllSongs();
 
 	public boolean nameExist(String name);
-
-	
 
 }

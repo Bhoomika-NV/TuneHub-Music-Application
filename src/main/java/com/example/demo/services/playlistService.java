@@ -5,8 +5,7 @@ import java.util.List;
 import com.example.demo.entities.PlayList;
 
 public interface playlistService {
- 
-	
+
 	public void addPlaylist(PlayList playlist);
 
 	public List<PlayList> fetchAllPlaylists();

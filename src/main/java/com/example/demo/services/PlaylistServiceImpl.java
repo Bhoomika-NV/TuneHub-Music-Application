@@ -16,12 +16,12 @@ public class PlaylistServiceImpl implements playlistService {
 
 	@Override
 	public void addPlaylist(PlayList playlist) {
-		 repo.save(playlist);
-		}
+		repo.save(playlist);
+	}
 
 	@Override
 	public List<PlayList> fetchAllPlaylists() {
- 
-return repo.findAll();
+
+		return repo.findAll();
 	}
 }

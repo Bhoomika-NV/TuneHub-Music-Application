@@ -13,29 +13,30 @@ public class SongServiceImpl implements SongService {
 
 	@Autowired
 	SongRepository repo;
+
 	@Override
-	public void addSong(Song song) { 
+	public void addSong(Song song) {
 		repo.save(song);
 	}
+
 	@Override
 	public List<Song> fetchAllSongs() {
- 		return repo.findAll();
- 		//findAll() retuturns a list of all the songs
+		return repo.findAll();
+		// findAll() retuturns a list of all the songs
 	}
+
 	@Override
 	public boolean nameExist(String name) {
-		 if(repo.findByName(name)==null)
-		 {
-			 return false;
-		 }
-		 else
-		 {
-			 return true;
-		 }
+		if (repo.findByName(name) == null) {
+			return false;
+		} else {
+			return true;
+		}
 
-}
+	}
+
 	@Override
 	public void updateSong(Song song) {
-		 repo.save(song);
+		repo.save(song);
 	}
 }

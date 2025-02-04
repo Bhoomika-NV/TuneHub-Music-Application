@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,78 +15,78 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @Controller
 public class UserController {
 	@Autowired
 	UsersServices service;
 
 	@PostMapping("/register")
-	/*public String addUsers(@RequestParam("username") String username,
-		@RequestParam("password") String password,@RequestParam("email") String email,
-		@RequestParam("gender") String gender,
-		@RequestParam("role") String role,@RequestParam("address") String address)
-	 */	
-	public String addUsers(@ModelAttribute Users user)
-	{
-		boolean user_status=service.emailExists(user.getEmail());  //task2
-		if(user_status==false)                                      //task2
+	/*
+	 * public String addUsers(@RequestParam("username") String username,
+	 * 
+	 * @RequestParam("password") String password,@RequestParam("email") String
+	 * email,
+	 * 
+	 * @RequestParam("gender") String gender,
+	 * 
+	 * @RequestParam("role") String role,@RequestParam("address") String address)
+	 */
+	public String addUsers(@ModelAttribute Users user) {
+		boolean user_status = service.emailExists(user.getEmail()); // task2
+		if (user_status == false) // task2
 		{
-			service.addUsers(user);                                      //task1
+			service.addUsers(user); // task1
 			System.out.println("user added successfully.");
-		}
-		else
-		{
+		} else {
 			System.out.println("User is already present");
 		}
-		                                 //System.out.println(user.getUsername()+" "+user.getPassword()+" "+user.getEmail()+" "+user.getGender()+" "+user.getRole()+" "+user.getAddress());
+		// System.out.println(user.getUsername()+" "+user.getPassword()+"
+		// "+user.getEmail()+" "+user.getGender()+" "+user.getRole()+"
+		// "+user.getAddress());
 		return "home";
 	}
+
 	// trying to push the changes here..
-	@PostMapping("/validate")							//task4
-	public String validate(@RequestParam("email") String email,
-			@RequestParam("password")String password ,HttpSession session, Model model)//when we,ll collect the data in backend Requestparm is user , here login module has email and password 
+	@PostMapping("/validate") // task4
+	public String validate(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session, Model model)// when we,ll collect the data in backend Requestparm is user , here login
+												// module has email and password
 	{
-		if( service.validateUser(email,password)==true)
-		{
-			String role=service.getRole(email);
-			
-			session.setAttribute("email",email);//when session object is created it will be empty  not contatining any attribute we'hv to add the email attribute.
-			
-			if(role.equals("Admin"))
-			{
+		if (service.validateUser(email, password) == true) {
+			String role = service.getRole(email);
+
+			session.setAttribute("email", email);// when session object is created it will be empty not contatining any
+													// attribute we'hv to add the email attribute.
+
+			if (role.equals("Admin")) {
 				return "adminHome";
-			}
-			else {
+			} else {
 				Users user = service.getUser(email);
-				boolean userStatus  = user.isPremium();
+				boolean userStatus = user.isPremium();
 				model.addAttribute("isPremium", user);
 				return "customerHome";
 			}
-		}
-		else
-		{
+		} else {
 			return "login";
 		}
 	}
 
 	@GetMapping("/pay")
 	public String pay(String email) {
-		boolean paymentStatus =false; // payment api
-		
-		if(paymentStatus == true) {
-			Users user =service.getUser(email);
+		boolean paymentStatus = false; // payment api
+
+		if (paymentStatus == true) {
+			Users user = service.getUser(email);
 			user.setPremium(true); // instance varible of users.java
-		 service.updateUser(user);	
+			service.updateUser(user);
 		}
 		return "pay";
 	}
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();//session.invalidate() is nothing but the ending the session object;
+		session.invalidate();// session.invalidate() is nothing but the ending the session object;
 		return "login";
 	}
-	
-}
 
+}
